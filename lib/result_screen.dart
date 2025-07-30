@@ -22,6 +22,11 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final totalQ = EmojiQA.length;
+    final summaryData = summaryofResult();
+    final correctQ = summaryData.where((value) {
+      return value['correct_answer'] == value['user_selected'];
+    }).length;
     return Center(
       child: Container(
         margin: EdgeInsets.all(20),
@@ -38,6 +43,15 @@ class ResultScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
+            Text(
+              "Your $correctQ answers out of $totalQ questions were correct",
+              style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 3, 213, 255),
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
+            SizedBox(height: 20),
             SummaryMaker(summaryofResult()),
             SizedBox(height: 20),
             ElevatedButton(onPressed: function1, child: Text("Restart Quiz")),
